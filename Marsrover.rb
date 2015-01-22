@@ -51,15 +51,23 @@ class Rover
 	end
 end
 
-# puts "Please input the plateau size"
-# plateau = gets.chomp
-
+puts "Please input the plateau size"
+plateau = gets.chomp
 
 puts "Give the location of the first Rover"
 roverone = gets.chomp
 rover1 = Rover.new(roverone[0].to_i,roverone[2].to_i,roverone[4].upcase)
-puts "Please input new instructions being L or R to turn left or right
+puts "Please input new instructions for Rover 1 being L or R to turn left or right
 and M to move a space forward. For example LLMRM"
 intial = gets.chomp.upcase
 rover1.read_instructions(intial)
 puts rover1
+
+puts "Give the location of the second Rover"
+rovertwo = gets.chomp
+rover2 = Rover.new(rovertwo[0].to_i,rovertwo[2].to_i,rovertwo[4].upcase)
+puts "Please input new instructions for Rover 2 being L or R to turn left or right
+and M to move a space forward. For example LLMRM"
+intial2 = gets.chomp.upcase
+rover2.read_instructions(intial2)
+puts rover2
