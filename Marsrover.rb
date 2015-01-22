@@ -6,12 +6,12 @@ class Rover
 		@direction = direction
 	end
 
-	def read_instructions
+	def read_instructions(instructions)
 		instructions.each_char do |instruction|
 			if instruction == "M"
 				move
 			elsif instruction == "L" || instruction == "R"
-				rotate
+				rotate(instruction)
 			else "That's not a valid command!"
 		    end
 		end
@@ -31,22 +31,22 @@ class Rover
 
 	end
 
-	def rotate
+	def rotate(turn)
 	
-		if ((@direction == "N") && (read_instructions == "L")) || ((read_instructions == "S") && (read_instructions == "R"))
+		if ((@direction == "N") && (turn == "L")) || ((@direction == "S") && (turn == "R"))
 			@direction = "W" 
 
-		elsif ((@direction == "S") && (read_instructions == "L")) || ((@direction == "N") && (read_instructions == "R"))
+		elsif ((@direction == "S") && (turn == "L")) || ((@direction == "N") && (turn == "R"))
 			@direction = "E"
 
-		elsif ((@direction == "E") && (read_instructions == "L")) || ((@direction == "W") && (read_instructions == "R"))
+		elsif ((@direction == "E") && (turn == "L")) || ((@direction == "W") && (turn == "R"))
 			@direction = "N"
-		elsif ((@direction == "W") && (read_instructions == "L")) || ((@direction == "E") && (read_instructions == "R"))
+		elsif ((@direction == "W") && (turn == "L")) || ((@direction == "E") && (turn == "R"))
 			@direction = "S"
 
 		end
 	end
-	def location
+	def to_s
 		"My new location is #{@x}, #{@y}, #{@direction}"
 	end
 end
@@ -56,13 +56,10 @@ end
 
 
 puts "Give the location of the first Rover"
-roverone = gets.chomp.upcase
-puts roverone
-rover1 = Rover.new(roverone[0], roverone[2], roverone[4])
-rover1.location
-
+roverone = gets.chomp
+rover1 = Rover.new(roverone[0].to_i,roverone[2].to_i,roverone[4].upcase)
 puts "Please input new instructions being L or R to turn left or right
 and M to move a space forward. For example LLMRM"
-instructions = gets.chomp.upcase
-# rover1.read_instructions
-rover1.location
+intial = gets.chomp.upcase
+rover1.read_instructions(intial)
+puts rover1
